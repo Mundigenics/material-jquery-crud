@@ -53,8 +53,8 @@
                 <input type="text" id="txtName"/>
               </md-input-container>
               <md-input-container>
-                <label>Age:</label>
-                <input type="text" id="txtAge"/>
+                <label>Date of Birth:</label>
+                <input type="text" id="txtDoB"/>
               </md-input-container>
               <md-input-container>
                 <label>Group:</label>
@@ -112,7 +112,7 @@ $(function(){
     var child = JSON.stringify({
       ID    : $("#txtID").val(),
       Name  : $("#txtName").val(),
-      Age   : $("#txtAge").val(),
+      DoB   : $("#txtDoB").val(),
       Group : $("#txtGroup").val(),
       Schedule : $("#txtSchedule").val()
     });
@@ -126,7 +126,7 @@ $(function(){
     tbChildren[selected_index] = JSON.stringify({
         ID    : $("#txtID").val(),
         Name  : $("#txtName").val(),
-        Age   : $("#txtAge").val(),
+        DoB   : $("#txtDoB").val(),
         Group : $("#txtGroup").val(),
         Schedule : $("#txtSchedule").val()
       });//Alter the selected item on the table
@@ -151,7 +151,7 @@ $(function(){
       " <th>Delete</th>"+
       " <th>ID</th>"+
       " <th>Name</th>"+
-      " <th>Age</th>"+
+      " <th>Date of Birth</th>"+
       " <th>Group</th>"+
       " <th>Schedule</th>"+
       " </tr>"+
@@ -166,7 +166,7 @@ $(function(){
                      "  <td><img src='delete.png' height=20 width=20 alt='Delete"+i+"' class='btnDelete'/></td>" + 
                      "  <td>"+chi.ID+"</td>" + 
                      "  <td>"+chi.Name+"</td>" + 
-                     "  <td>"+chi.Age+"</td>" +
+                     "  <td>"+chi.DoB+"</td>" +
                      "  <td>"+chi.Group+"</td>" + 
                      "  <td>"+chi.Schedule+"</td>" + 
                        "</tr>");
@@ -190,7 +190,7 @@ $(function(){
     var chi = JSON.parse(tbChildren[selected_index]);
     $("#txtID").val(chi.ID);
     $("#txtName").val(chi.Name);
-    $("txtAge").val(chi.Age);
+    $("txtDoB").val(chi.DoB);
     $("#txtGroup").val(chi.Group);
     $("#txtSchedule").val(chi.Schedule);
     $("#txtID").attr("readonly","readonly");
