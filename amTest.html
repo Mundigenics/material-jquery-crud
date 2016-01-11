@@ -8,89 +8,119 @@
   <!--
     Your HTML content here
   -->  
-  <div layout="row" flex ng-controller="AppCtrl" style="height:55px;"ng-cloak>
-    <md-toolbar class="md-theme-blue">
-      <h1 class="md-toolbar-tools">
-        <md-button ng-click="toggleLeft()" class="md-primary" hide-gt-md><i class="material-icons">menu</i></md-button>
-        Dashboard
-      </h1>
+  <div layout="row" flex ng-controller="AppCtrl" ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" ng-click="toggleLeft()" aria-label="Settings">
+          <i class="material-icons">menu</i>
+        </md-button>
+        <h2>
+          <span>Dashboard</span>
+        </h2>
+        <span style="width: 200px;"></span>
+        &nbsp
+        <span >
+          <label>Username:</label>
+          &nbsp
+          <input type="text" style="width:125px;" />
+          &nbsp
+          <label>Password:</label>
+          &nbsp
+          <input type="password" style="width:125px;" />
+        </span>
+        </md-input-container>
+      </div>
     </md-toolbar>
   </div>
-  <div ng-controller="AppCtrl" flex layout="column" style="height:500px;" ng-cloak>
-  <section layout="row" flex>
-    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-      <md-toolbar class="md-theme-blue">
-        <h1 class="md-toolbar-tools">Menu Tools</h1>
-      </md-toolbar>
-      <md-content layout-padding ng-controller="AppCtrl" ng-cloak>
-      <form>
-          <md-input-container>
-            <label for="testInput">Test input</label>
-            <input type="text" id="testInput"
-                   ng-model="data" md-autofocus>
-          </md-input-container>
-        </form>
-        <p hide-md show-gt-md>
-          This sidenav is locked open on your device. To go back to the default behavior,
-          narrow your display.
-        </p>
-      </md-content>
-    </md-sidenav>
-    <md-content flex layout-padding>
-      <div layout="column" layout-fill layout-align="top center">
-        <p>
-        The left sidenav will 'lock open' on a medium (>=960px wide) device.
-        </p>
-        <div layout="column" sm-layout="column" flex>
-          <form id="frmCadastre">
-            <ul>
-              <md-input-container>
-                <label>ID:</label>
-                <input type="text" id="txtID"/>
-              </md-input-container>
-              <md-input-container>
-                <label>Name:</label>
-                <input type="text" id="txtName"/>
-              </md-input-container>
-              <md-input-container>
-                <label>Date of Birth:</label>
-                <input type="text" id="txtDoB"/>
-              </md-input-container>
-              <md-input-container>
-                <label>Group:</label>
-                <input type="text" id="txtGroup"/>
-              </md-input-container>
-              <md-input-container>
-                <label>Schedule:</label>
-                <input type="text" id="txtSchedule"/>
-              </md-input-container>
-              <md-button>
-                <input type="submit" value="Save" aria-label="Save" id="btnSave"/>
-              </md-button>
-            </ul>
-          </form>
-      </div>
-      <div>
-        <table id="tblList"></table>
-      </div>
-      <!-- <div ng-controller="AppCtrl" ng-cloak>
-        <md-content>
-          <md-list>
-            <md-subheader class="md-no-sticky">Children</md-subheader>
-            <md-list-item ng-repeat="chi in tbChildren">
-              <input type="text" ng-model="chi.Name">
+
+  <div ng-controller="AppCtrl" flex layout="column" style="height:600px;" ng-cloak>
+    <section layout="row" >
+      <span style="height:55px;"></span>
+      <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+        <md-content ng-controller="AppCtrl" ng-cloak>
+          <md-list ng-cloak>
+            <md-subheader class="md-no-sticky">Options</md-subheader>
+            <md-list-item ng-click="navigateTo('Locations', $event)">
+              <p>Location</p>
             </md-list-item>
+              <md-list-item ng-click="navigateTo('Rooms', $event)">
+              <p>Rooms</p>
+            </md-list-item>
+              <md-list-item ng-click="navigateTo('Groups', $event)">
+              <p>Groups</p>
+            </md-list-item>
+              <md-list-item ng-click="navigateTo('Children', $event)">
+              <p>Child</p>
+            </md-list-item>
+            <md-divider></md-divider>
           </md-list>
+          <p hide-md show-gt-md>
+            This sidenav is locked open on your device. To go back to the default behavior,
+            narrow your display.
+          </p>
         </md-content>
-      </div> -->
-    </div>
-  </section>
-</div>
-<div layout="row" layout-align="right">
-<md-button class="md-fab md-accent md-hue-2" aria-label="Add">
-        +
-    </md-button>
-</div>
+      </md-sidenav>
+      <md-content layout-padding>
+        <div layout="column" layout-fill layout-align="top center">
+          <div layout="column" sm-layout="column">
+            <form id="frmCadastre">
+              <ul>
+                <md-input-container>
+                  <label>ID:</label>
+                  <input type="text" id="txtID"/>
+                </md-input-container>
+                <md-input-container>
+                  <label>Name:</label>
+                  <input type="text" id="txtName"/>
+                </md-input-container>
+              </ul>
+              <ul>  
+                <md-input-container>
+                  <label>Date of Birth:</label>
+                  <input type="text" id="txtDoB"/>
+                </md-input-container>
+                <md-input-container>
+                  <label>Group:</label>
+                  <input type="text" id="txtGroup"/>
+                </md-input-container>
+              </ul>
+              <ul>  
+                <md-input-container>
+                  <label>Schedule:</label>
+                  <input type="text" id="txtSchedule"/>
+                </md-input-container>
+                <span>
+                  <input type="submit" class="md-raised md-primary" value="Save" aria-label="Save" id="btnSave"/>
+                </span>
+              </ul>
+            </form>
+          </div>
+          <div>
+            <table id="tblList"></table>
+          </div>
+          <!-- <div ng-controller="AppCtrl" ng-cloak>
+            <md-content>
+              <md-list>
+                <md-subheader class="md-no-sticky">Children</md-subheader>
+                <md-list-item ng-repeat="chi in tbChildren">
+                  <input type="text" ng-model="chi.Name">
+                </md-list-item>
+              </md-list>
+            </md-content>
+          </div> -->
+        </div>
+        <div layout="row">
+          <span style="width: 500px"></span>
+          <span layout="row" layout-align="right">
+            <md-button class="md-fab md-accent md-hue-2" aria-label="Add">
+              +
+            </md-button>
+          </span>
+        </div>
+      </md-content>
+    </section>
+  </div>
+
 
 <!-- jQuery Library and code -->
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
@@ -147,11 +177,11 @@ $(function(){
     $("#tblList").html(
       "<thead>"+
       " <tr>"+
-      " <th>Update</th>"+
-      " <th>Delete</th>"+
+      " <th></th>"+
+      " <th></th>"+
       " <th>ID</th>"+
-      " <th>Name</th>"+
-      " <th>Date of Birth</th>"+
+      " <th>Full Name</th>"+
+      " <th>D.o.B.</th>"+
       " <th>Group</th>"+
       " <th>Schedule</th>"+
       " </tr>"+
@@ -190,7 +220,7 @@ $(function(){
     var chi = JSON.parse(tbChildren[selected_index]);
     $("#txtID").val(chi.ID);
     $("#txtName").val(chi.Name);
-    $("txtDoB").val(chi.DoB);
+    $("#txtDoB").val(chi.DoB);
     $("#txtGroup").val(chi.Group);
     $("#txtSchedule").val(chi.Schedule);
     $("#txtID").attr("readonly","readonly");
@@ -220,7 +250,7 @@ $(function(){
      * You must include the dependency on 'ngMaterial' 
      */
     angular.module('TestApp', ['ngMaterial'])
-  .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+  .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, $log, $mdDialog) {
     $scope.toggleLeft = buildDelayedToggler('left');
     /**
      * Supplies a function that will continue to operate until the
@@ -260,6 +290,17 @@ $(function(){
           });*/
       }
     }
+
+    $scope.navigateTo = function(to, event) {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .title('Navigating')
+        .textContent('Imagine being taken to ' + to)
+        .ariaLabel('Navigation demo')
+        .ok('Neat!')
+        .targetEvent(event)
+      );
+    };
   })
 </script>
   
