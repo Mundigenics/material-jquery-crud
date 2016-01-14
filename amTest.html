@@ -17,7 +17,7 @@
         <h2>
           <span>Dashboard</span>
         </h2>
-        <span style="width: 200px;"></span>
+        <span style="width: 300px;"></span>
         &nbsp
         <span >
           <label>Username:</label>
@@ -33,7 +33,7 @@
     </md-toolbar>
   </div>
 
-  <div ng-controller="AppCtrl" flex layout="column" style="height:600px;" ng-cloak>
+  <div ng-controller="AppCtrl" flex layout="column" style="height: Device;" ng-cloak>
     <section layout="row" >
       <span style="height:55px;"></span>
       <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
@@ -62,57 +62,26 @@
       </md-sidenav>
       <md-content layout-padding>
         <div layout="column" layout-fill layout-align="top center">
-          <div layout="column" sm-layout="column">
-            <form id="frmCadastre">
-              <ul>
-                <md-input-container>
-                  <label>ID:</label>
-                  <input type="text" id="txtID"/>
-                </md-input-container>
-                <md-input-container>
-                  <label>Name:</label>
-                  <input type="text" id="txtName"/>
-                </md-input-container>
-              </ul>
-              <ul>  
-                <md-input-container>
-                  <label>Date of Birth:</label>
-                  <input type="text" id="txtDoB"/>
-                </md-input-container>
-                <md-input-container>
-                  <label>Group:</label>
-                  <input type="text" id="txtGroup"/>
-                </md-input-container>
-              </ul>
-              <ul>  
-                <md-input-container>
-                  <label>Schedule:</label>
-                  <input type="text" id="txtSchedule"/>
-                </md-input-container>
-                <span>
-                  <input type="submit" class="md-raised md-primary" value="Save" aria-label="Save" id="btnSave"/>
-                </span>
-              </ul>
-            </form>
-          </div>
-          <div>
-            <table id="tblList"></table>
-          </div>
-          <!-- <div ng-controller="AppCtrl" ng-cloak>
+          <div ng-controller="AppCtrl" ng-cloak>
             <md-content>
               <md-list>
                 <md-subheader class="md-no-sticky">Children</md-subheader>
-                <md-list-item ng-repeat="chi in tbChildren">
-                  <input type="text" ng-model="chi.Name">
+                <md-list-item ng-repeat="child in children">
+                 <div flex>{{child.ID}}</div> &nbsp <div flex>{{child.FirstName}} {{child.Surname}}</div> &nbsp <div flex>{{child.Dob}}</div> &nbsp <div flex>{{child.Gender}}</div>  &nbsp <div flex>{{child.Group}}</div> &nbsp <div flex>{{child.Loc}}</div> &nbsp <div flex>{{child.PGOne}}</div> &nbsp <div flex>{{child.PGTwo}}</div> &nbsp <div flex>{{child.Schedule}}</div>
+                  <md-divider ></md-divider>
                 </md-list-item>
+
               </md-list>
             </md-content>
+          </div>
+<!--           <div>
+            <table id="tblList"></table>
           </div> -->
         </div>
         <div layout="row">
-          <span style="width: 500px"></span>
+          <span style="width: 700px"></span>
           <span layout="row" layout-align="right">
-            <md-button class="md-fab md-accent md-hue-2" aria-label="Add">
+            <md-button class="md-fab md-accent md-hue-2" aria-label="Add" ng-click="showTabDialog('AddChild', $event)">
               +
             </md-button>
           </span>
@@ -141,9 +110,14 @@ $(function(){
   function Add(){
     var child = JSON.stringify({
       ID    : $("#txtID").val(),
-      Name  : $("#txtName").val(),
+      FirstName: $("#txtFirstName").val(),
+      LastName: $("#txtLastName").val(),
       DoB   : $("#txtDoB").val(),
+      Gender: $("#txtGender").val(),
+      PG1   : $("#txtPG1").val(), 
+      PG2   : $("#txtPG2").val(),
       Group : $("#txtGroup").val(),
+      Loc   : $("#txtLoc").val(),
       Schedule : $("#txtSchedule").val()
     });
     tbChildren.push(child);
@@ -155,9 +129,14 @@ $(function(){
   function Edit(){
     tbChildren[selected_index] = JSON.stringify({
         ID    : $("#txtID").val(),
-        Name  : $("#txtName").val(),
+        FirstName: $("#txtFirstName").val(),
+        LastName: $("#txtLastName").val(),
         DoB   : $("#txtDoB").val(),
+        Gender: $("#txtGender").val(),
+        PG1   : $("#txtPG1").val(), 
+        PG2   : $("#txtPG2").val(),
         Group : $("#txtGroup").val(),
+        Loc   : $("#txtLoc").val(),
         Schedule : $("#txtSchedule").val()
       });//Alter the selected item on the table
     localStorage.setItem("tbChildren", JSON.stringify(tbChildren));
@@ -180,9 +159,14 @@ $(function(){
       " <th></th>"+
       " <th></th>"+
       " <th>ID</th>"+
-      " <th>Full Name</th>"+
+      " <th>First Name</th>"+
+      " <th>Last Name</th>"+
       " <th>D.o.B.</th>"+
-      " <th>Group</th>"+
+      " <th>Gender</th>"+
+      " <th>Parent/Guardian #1</th>"+
+      " <th>Parent/Guardian #2</th>"+
+      " <th>Current Group</th>"+
+      " <th>Location</th>"+
       " <th>Schedule</th>"+
       " </tr>"+
       "</thead>"+
@@ -195,9 +179,14 @@ $(function(){
                      "  <td><img src='edit.png' height=20 width=20 alt='Edit"+i+"' class='btnEdit'/></td>" +
                      "  <td><img src='delete.png' height=20 width=20 alt='Delete"+i+"' class='btnDelete'/></td>" + 
                      "  <td>"+chi.ID+"</td>" + 
-                     "  <td>"+chi.Name+"</td>" + 
+                     "  <td>"+chi.FirstName+"</td>" +
+                     "  <td>"+chi.LastName+"</td>"+ 
                      "  <td>"+chi.DoB+"</td>" +
-                     "  <td>"+chi.Group+"</td>" + 
+                     "  <td>"+chi.Gender+"</td>" +
+                     "  <td>"+chi.PG1+"</td>" +
+                     "  <td>"+chi.PG2+"</td>" + 
+                     "  <td>"+chi.Group+"</td>" +
+                     "  <td>"+chi.Loc+"</td>" + 
                      "  <td>"+chi.Schedule+"</td>" + 
                        "</tr>");
     }
@@ -219,12 +208,17 @@ $(function(){
     
     var chi = JSON.parse(tbChildren[selected_index]);
     $("#txtID").val(chi.ID);
-    $("#txtName").val(chi.Name);
+    $("#txtFirstName").val(chi.FirstName);
+    $("#txtLastName").val(chi.LastName);
     $("#txtDoB").val(chi.DoB);
+    $("#txtGender").val(chi.Gender);
+    $("#txtPG1").val(chi.PG1);
+    $("#txtPG2").val(chi.PG2);
     $("#txtGroup").val(chi.Group);
+    $("#txtLoc").val(chi.Loc);
     $("#txtSchedule").val(chi.Schedule);
     $("#txtID").attr("readonly","readonly");
-    $("#txtName").focus();
+    $("#txtID").focus();
   });
 
   $(".btnDelete").live("click", function(){
@@ -301,7 +295,262 @@ $(function(){
         .targetEvent(event)
       );
     };
-  })
+
+  $scope.showTabDialog = function(ev) {
+    $mdDialog.show({
+      controller: AppCtrl,
+      templateUrl: 'tabDialog.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true
+    })
+  };
+
+
+
+    $scope.children = [
+    {
+      ID : "C-001", 
+      FirstName : "Isabelle",
+      Surname: "Fahey",
+      DoB : "2-Feb-2015",
+      Gender : "Female",
+      Group : "Babies",
+      Loc : "Drumcondra",
+      PGOne : "Suzanne Fahey",
+      PGTwo : "Eoin Fahey", 
+      Schedule : "Full Day Care",
+    },
+    {
+      ID : "C-002", 
+      FirstName : "Oisin",
+      Surname: "Conlan",
+      DoB : "13-Dec-2014",
+      Gender : "Male",
+      Group : "Babies",
+      Loc : "Drumcondra",
+      PGOne : "Fiona Conlon",
+      PGTwo : "Niall Conlon", 
+      Schedule : "Full Day Care",
+    },
+    {
+      ID : "C-003", 
+      FirstName : "Oscar",
+      Surname: "O'Halloran",
+      DoB : "29-Nov-2014",
+      Gender : "Male",
+      Group : "Babies",
+      Loc : "Drumcondra",
+      PGOne : "Niamh Quinlivan",
+      PGTwo : "Sean O'Halloran", 
+      Schedule : "Full Day Care",
+    },
+    {
+      ID : "C-004", 
+      FirstName : "Cain",
+      Surname: "Thompson",
+      DoB : "7-Jan-2015",
+      Gender : "Male",
+      Group : "Babies",
+      Loc : "Drumcondra",
+      PGOne : "Rebecca Harney",
+      PGTwo : "Keith Thompson", 
+      Schedule : "Full Day Care",
+    },
+    {
+      ID : "C-005", 
+      FirstName : "Conor",
+      Surname: "Ryan",
+      DoB : "23-Dec-2014",
+      Gender : "Male",
+      Group : "Babies",
+      Loc : "Drumcondra",
+      PGOne : "Mary Brennan",
+      PGTwo : "Eamonn Ryan", 
+      Schedule : "Full Day Care",
+    },
+    {
+      ID : "C-006", 
+      FirstName : "Cian",
+      Surname: "Millar",
+      DoB : "1-Jan-2015",
+      Gender : "Male",
+      Group : "Babies",
+      Loc : "Drumcondra",
+      PGOne : "Catriona Fagan",
+      PGTwo : "Liam  Millar", 
+      Schedule : "Full Day Care",
+    },
+    {
+      ID : "C-007", 
+      FirstName : "Erin",
+      Surname: "Mullen",
+      DoB : "27-Dec-2014",
+      Gender : "Female",
+      Group : "Babies",
+      Loc : "Drumcondra",
+      PGOne : "Kristin Mc Guinness",
+      PGTwo : "Andrew Mullen", 
+      Schedule : "Full Day Care",
+    },
+    {
+      ID : "C-008", 
+      FirstName : "Andrew",
+      Surname: "Ferguson",
+      DoB : "12-Mar-2014",
+      Gender : "Male",
+      Group : "Tweenies",
+      Loc : "Drumcondra",
+      PGOne : "Liz Ferguson",
+      PGTwo : "Paul Ferguson", 
+      Schedule : "Full Day Care",
+    },
+    {
+      ID : "C-009", 
+      FirstName : "Odhran",
+      Surname: "Madden",
+      DoB : "17-Feb-2014",
+      Gender : "Male",
+      Group : "Tweenies",
+      Loc : "Drumcondra",
+      PGOne : "Aoileann Madden",
+      PGTwo : "Ian Madden", 
+      Schedule : "Full Day Care",
+    },
+    {
+      ID : "C-010", 
+      FirstName : "Oscar",
+      Surname: "Giagodi",
+      DoB : "8-Apr-2014",
+      Gender : "Male",
+      Group : "Tweenies",
+      Loc : "Drumcondra",
+      PGOne : "Ginevra Picchi",
+      PGTwo : "Alessandro Giagodi", 
+      Schedule : "Full Day Care",
+    },
+    {
+      ID : "C-011", 
+      FirstName : "Santiago",
+      Surname: "Giagodi",
+      DoB : "8-Apr-2014",
+      Gender : "Male",
+      Group : "Tweenies",
+      Loc : "Drumcondra",
+      PGOne : "Ginevra Picchi",
+      PGTwo : "Alessandro Giagodi", 
+      Schedule : "Full Day Care",
+    },
+    {
+      ID : "C-012", 
+      FirstName : "Rateel",
+      Surname: "Al-Marzuog",
+      DoB : "3-Feb-2014",
+      Gender : "Female",
+      Group : "Tweenies",
+      Loc : "Drumcondra",
+      PGOne : "Bushra Al-Sallum",
+      PGTwo : "Khalid Al-Marzuog", 
+      Schedule : "Full Day Care",
+    },
+    {
+      ID : "C-013", 
+      FirstName : "Conall",
+      Surname: "Mc Carthy",
+      DoB : "3-Jul-2014",
+      Gender : "Male",
+      Group : "Tweenies",
+      Loc : "Drumcondra",
+      PGOne : "Rose Anna Mc Carthy",
+      PGTwo : "Damien McCarthy", 
+      Schedule : "Full Day Care",
+    },
+    {
+      ID : "C-014", 
+      FirstName : "Jamie",
+      Surname: "O'Hora",
+      DoB : "19-Apr-2014",
+      Gender : "Male",
+      Group : "Tweenies",
+      Loc : "Drumcondra",
+      PGOne : "Monica O'Hora",
+      PGTwo : "Lee O'Hora", 
+      Schedule : "Full Day Care",
+    },
+    {
+      ID : "C-015", 
+      FirstName : "Hugo",
+      Surname: "Ruffet",
+      DoB : "17-May-2014",
+      Gender : "Male",
+      Group : "Tweenies",
+      Loc : "Drumcondra",
+      PGOne : "Miyabi Matsushiro",
+      PGTwo : "Francois Ruffet", 
+      Schedule : "Full Day Care",
+    },
+    {
+      ID : "C-016", 
+      FirstName : "Davin",
+      Surname: "O'Keefe",
+      DoB : "30-Apr-2014",
+      Gender : "Male",
+      Group : "Tweenies",
+      Loc : "Drumcondra",
+      PGOne : "Leigh Farrelly O'Keefe",
+      PGTwo : "John  O'Keefe", 
+      Schedule : "Full Day Care",
+    },
+    {
+      ID : "C-017", 
+      FirstName : "Lily",
+      Surname: "Pringle",
+      DoB : "27-Apr-2014",
+      Gender : "Female",
+      Group : "Tweenies",
+      Loc : "Drumcondra",
+      PGOne : "Liza-Jane Pringle",
+      PGTwo : "Patrick Beere", 
+      Schedule : "Full Day Care",
+    },
+    {
+      ID : "C-018", 
+      FirstName : "Charlie",
+      Surname: "Westlake",
+      DoB : "23-Mar-2014",
+      Gender : "Male",
+      Group : "Tweenies",
+      Loc : "Drumcondra",
+      PGOne : "Felicity Westlake",
+      PGTwo : "Marc Westlake", 
+      Schedule : "Full Day Care",
+    },
+    {
+      ID : "C-019", 
+      FirstName : "Ed",
+      Surname: "Hurley",
+      DoB : "25-Oct-2014",
+      Gender : "Male",
+      Group : "Tweenies",
+      Loc : "Drumcondra",
+      PGOne : "Lucy Hurley",
+      PGTwo : "Michael Hurley", 
+      Schedule : "Full Day Care",      
+    },
+    {
+      ID : "C-020", 
+      FirstName : "Ciara",
+      Surname: "Lyons",
+      DoB : "1-Oct-2014",
+      Gender : "Female",
+      Group : "Tweenies",
+      Loc : "Drumcondra",
+      PGOne : "Amanda Quail",
+      PGTwo: "Sean Lyons", 
+      Schedule : "Full Day Care",
+    },
+  ]
+})
 </script>
   
 </body>
