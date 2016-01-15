@@ -1,5 +1,18 @@
- <div layout="column" sm-layout="column">
-            <form id="frmCadastre">
+<md-dialog aria-label="Add Child">
+    <form id="frmCadastre">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2>Add Child</h2>
+          <span flex></span>
+          <md-button class="md-icon-button" ng-click="cancel()">
+            <i class="material-icons"aria-label="Close dialog">close</i>
+          </md-button>
+        </div>
+      </md-toolbar>
+      <md-dialog-content style="max-width:800px;max-height:810px; ">
+        <md-tabs md-dynamic-height md-border-bottom>
+          <md-tab label="one">
+            <md-content class="md-padding">
               <ul>
                 <md-input-container>
                   <label>ID:</label>
@@ -14,6 +27,10 @@
                   <input type="text" id="txtLastName">
                 </md-input-container>
               </ul>
+            </md-content>
+          </md-tab>
+          <md-tab label="two">
+            <md-content class="md-padding">
               <ul>
                 <md-input-container>
                   <label>Date of Birth:</label>
@@ -32,6 +49,10 @@
                   <input type="text" id="txtPG2"/>
                 </md-input-container>
               </ul>
+            </md-content>
+          </md-tab>
+          <md-tab label="three">
+            <md-content class="md-padding">
               <ul>    
                 <md-input-container>
                   <label>Group:</label>
@@ -45,9 +66,15 @@
                   <label>Schedule:</label>
                   <input type="text" id="txtSchedule"/>
                 </md-input-container>
-                <span>
-                  <input type="submit" class="md-raised md-primary" value="Save" aria-label="Save" id="btnSave"/>
-                </span>
               </ul>
-            </form>
-          </div>
+            </md-content>
+          </md-tab>
+        </md-tabs>
+      </md-dialog-content>
+        <md-dialog-actions layout="row">
+          <span>
+            <input type="submit" class="md-raised md-primary" value="Save" aria-label="Save" id="btnSave"/>
+          </span>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
